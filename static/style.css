@@ -1,0 +1,149 @@
+/* ===== Global Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ===== Body Background ===== */
+body {
+  background: linear-gradient(135deg, #0072ff, #00c6ff);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+}
+
+/* ===== Container Card ===== */
+.container {
+  background: #ffffff;
+  width: 95%;
+  max-width: 500px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  padding: 40px 30px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* ===== Heading ===== */
+.container h2 {
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  background: linear-gradient(90deg, #0072ff, #00c6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===== Form Styling ===== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+/* ===== Inputs & Selects ===== */
+input[type="number"],
+select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  outline: none;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+input[type="number"]:focus,
+select:focus {
+  border-color: #0072ff;
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgba(0, 114, 255, 0.3);
+}
+
+/* ===== Submit Button ===== */
+button {
+  margin-top: 10px;
+  background: linear-gradient(90deg, #0072ff, #00c6ff);
+  color: #fff;
+  border: none;
+  padding: 14px 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #005ce6, #00aaff);
+  transform: translateY(-2px);
+}
+
+/* ===== Result Box ===== */
+.result {
+  margin-top: 25px;
+  padding: 15px 20px;
+  border-radius: 12px;
+  background: #f1faff;
+  border-left: 6px solid #0072ff;
+  font-weight: 600;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.result p {
+  font-size: 1.05rem;
+  color: #333;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 480px) {
+  .container {
+    padding: 30px 20px;
+  }
+
+  .container h2 {
+    font-size: 1.5rem;
+  }
+
+  input,
+  select,
+  button {
+    font-size: 0.95rem;
+  }
+}
