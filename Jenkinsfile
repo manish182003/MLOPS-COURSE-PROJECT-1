@@ -3,6 +3,8 @@ pipeline{
 
     environment {
         VENV_DIR = 'venv'
+        GCP_PROJECT= "dliva2-audc8s"
+        GCLOUD_PATH= "/var/jenkins_home/google-cloud-sdk/bin"
     }
 
     stages{
@@ -31,5 +33,34 @@ pipeline{
                 }
             }
         }
+
+        
+
+         stage('Building and Pushing Docker Image to GCR') {
+      steps {
+        withCredentials([string(credentialsId: 'gcp-user-auth', variable: 'GCP_JSON')]) {
+          echo  'Building and Pushing Docker Image to GCR'
+          sh '''
+          echo "$GCP_JSON" > /tmp/gcp-creds.json
+          export PATH=$PATH:${GCLOUD_PATH}
+          export GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp-creds.json
+          gcloud auth application-default login --brief || true
+          gcloud config set project ${GCP_PROJECT}
+          gcloud compute instances list
+
+          gcloud auth configure -docker --quiet
+
+          docker build -t gcr.io/${GCP_PROJECT}/ml-project-latest .
+
+          docker push  gcr.io/${GCP_PROJECT}/ml-project-latest 
+          
+          '''
+        }
+      }
+    }
+
+
+   
+
     }
 }
