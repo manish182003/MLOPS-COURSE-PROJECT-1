@@ -41,19 +41,16 @@ pipeline{
         withCredentials([string(credentialsId: 'gcp-user-auth', variable: 'GCP_JSON')]) {
           echo  'Building and Pushing Docker Image to GCR'
           sh '''
-          echo "$GCP_JSON" > /tmp/gcp-creds.json
-          export PATH=$PATH:${GCLOUD_PATH}
-          export GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp-creds.json
-          gcloud auth application-default login --brief || true
-          gcloud config set project ${GCP_PROJECT}
+            export PATH=$PATH:${GCLOUD_PATH}
+            gcloud config set project ${GCP_PROJECT}
+            gcloud auth configure-docker --quiet
           gcloud compute instances list
 
-          gcloud auth configure -docker --quiet
 
           docker build -t gcr.io/${GCP_PROJECT}/ml-project-latest .
 
           docker push  gcr.io/${GCP_PROJECT}/ml-project-latest 
-          
+
           '''
         }
       }
