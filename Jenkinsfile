@@ -44,7 +44,6 @@ pipeline{
             export PATH=$PATH:${GCLOUD_PATH}
             gcloud config set project ${GCP_PROJECT}
             gcloud auth configure-docker --quiet
-          gcloud compute instances list
 
 
           docker build -t gcr.io/${GCP_PROJECT}/ml-project-latest .
