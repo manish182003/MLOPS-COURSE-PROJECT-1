@@ -42,8 +42,6 @@ pipeline{
           echo  'Building and Pushing Docker Image to GCR'
           sh '''
             export PATH=$PATH:${GCLOUD_PATH}
-            echo "$GCP_JSON" > key.json
-            gcloud auth activate-service-account --key-file=key.json
             gcloud config set project ${GCP_PROJECT}
             gcloud auth configure-docker --quiet
 
@@ -52,7 +50,6 @@ pipeline{
 
           docker push  gcr.io/${GCP_PROJECT}/ml-project-latest 
 
-        rm key.json
 
           '''
         }
